@@ -32,5 +32,66 @@ body {
 #message {
     margin-top: 20px;
     font-size: 24px;
+    color: green;
+    font-weight: bold;
+}
+
+#game-status {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 10px;
+    background: #e8e8e8;
+    border-radius: 5px;
+}
+
+#controls {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#controls button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#start-memorizing {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#start-memorizing:hover {
+    background-color: #45a049;
+}
+
+#start-playing {
+    background-color: #2196F3;
+    color: white;
+}
+
+#start-playing:hover {
+    background-color: #1976D2;
+}
+
+#restart {
+    background-color: #f44336;
+    color: white;
+}
+
+#restart:hover {
+    background-color: #d32f2f;
+}
+
+#phase-info {
+    font-weight: bold;
     color: #333;
+}
+
+#current-phase {
+    color: #2196F3;
 }

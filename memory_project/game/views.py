@@ -36,6 +36,7 @@ def flip_card(request, index):
         'moves': game.moves,
         'win': game.is_win(),
         'mismatch': mismatch,
+        'phase': game.phase,
     }
     return JsonResponse(response)
 
@@ -44,3 +45,33 @@ def restart_game(request):
     if SESSION_KEY in request.session:
         del request.session[SESSION_KEY]
     return redirect(reverse('index'))
+
+
+def start_memorizing(request):
+    """Start the memorizing phase"""
+    game = get_game(request)
+    game.start_memorizing()
+    request.session[SESSION_KEY] = game.to_dict()
+    response = {
+        'cards': game.cards,
+        'states': [1] * len(game.cards),  # Show all cards
+        'moves': game.moves,
+        'phase': game.phase,
+        'win': False,
+    }
+    return JsonResponse(response)
+
+
+def start_playing(request):
+    """Start the playing phase"""
+    game = get_game(request)
+    game.start_playing()
+    request.session[SESSION_KEY] = game.to_dict()
+    response = {
+        'cards': game.cards,
+        'states': game.states,
+        'moves': game.moves,
+        'phase': game.phase,
+        'win': False,
+    }
+    return JsonResponse(response)

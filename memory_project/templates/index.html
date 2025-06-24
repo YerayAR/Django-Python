@@ -8,13 +8,28 @@
 </head>
 <body>
     <h1>Memory Game</h1>
-    <div id="moves">Moves: {{ game.moves }}</div>
+    <div id="game-status">
+        <div id="phase-info">Phase: <span id="current-phase">Setup</span></div>
+        <div id="moves">Moves: {{ game.moves }}</div>
+    </div>
+    
+    <div id="controls">
+        <button id="start-memorizing" style="display: block;">Start Memorizing (Show Cards)</button>
+        <button id="start-playing" style="display: none;">Start Playing (Hide Cards)</button>
+        <button id="restart">Restart Game</button>
+    </div>
+    
+    <div id="instructions" style="margin: 20px 0; padding: 10px; background: #f0f0f0; border-radius: 5px;">
+        <p><strong>How to play:</strong></p>
+        <p id="instruction-text">Click "Start Memorizing" to see all the cards and memorize their positions.</p>
+    </div>
+    
     <div id="board" class="board">
-        {% for i in range(game.cards|length) %}
-        <div class="card" data-index="{{ i }}"></div>
+        {% for card in game.cards %}
+        <div class="card" data-index="{{ forloop.counter0 }}"></div>
         {% endfor %}
     </div>
-    <button id="restart">Restart Game</button>
+    
     <div id="message" class="message" style="display: none;">You Win!</div>
 
     <script src="/static/js/game.js"></script>
