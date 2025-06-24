@@ -1,8 +1,10 @@
 services:
   web:
+    # Build image from Dockerfile in current directory
     build: .
     ports:
       - "8000:8000"
+    # Mount source for live reload
     volumes:
       - .:/app
     environment:

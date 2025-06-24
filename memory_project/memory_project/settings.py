@@ -1,3 +1,5 @@
+"""Django settings for the Memory Game project."""
+
 import os
 from pathlib import Path
 

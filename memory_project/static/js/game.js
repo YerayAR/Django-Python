@@ -1,3 +1,6 @@
+/**
+ * Update the DOM to reflect the current board state returned by the backend.
+ */
 function updateBoard(data) {
     const board = document.getElementById('board');
     const cards = board.getElementsByClassName('card');
@@ -26,6 +29,9 @@ function updateBoard(data) {
     }
 }
 
+/**
+ * Change UI elements depending on the current phase of the game.
+ */
 function updatePhase(phase) {
     const phaseElement = document.getElementById('current-phase');
     const instructionElement = document.getElementById('instruction-text');
@@ -54,6 +60,9 @@ function updatePhase(phase) {
     }
 }
 
+/**
+ * Request the backend to flip a card and update the board.
+ */
 function fetchFlip(index) {
     fetch('/flip/' + index + '/')
         .then(response => response.json())
@@ -61,6 +70,7 @@ function fetchFlip(index) {
             updateBoard(data);
             if (data.mismatch) {
                 setTimeout(() => {
+                    // Resolve mismatch after short delay
                     fetch('/flip/-1/')
                         .then(r => r.json())
                         .then(updateBoard);
@@ -69,6 +79,7 @@ function fetchFlip(index) {
         });
 }
 
+/** Trigger the memorizing phase via AJAX. */
 function startMemorizing() {
     fetch('/start-memorizing/')
         .then(response => response.json())
@@ -77,6 +88,7 @@ function startMemorizing() {
         });
 }
 
+/** Trigger the playing phase via AJAX. */
 function startPlaying() {
     fetch('/start-playing/')
         .then(response => response.json())
@@ -85,6 +97,7 @@ function startPlaying() {
         });
 }
 
+// Wire up click handlers once the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
