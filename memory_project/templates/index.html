@@ -1,37 +1,46 @@
+<!-- Main page for the Memory Game -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Game</title>
+    <!-- Main stylesheet for board layout -->
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <h1>Memory Game</h1>
+    <!-- Display current phase and move count -->
     <div id="game-status">
         <div id="phase-info">Phase: <span id="current-phase">Setup</span></div>
         <div id="moves">Moves: {{ game.moves }}</div>
     </div>
     
+    <!-- Buttons controlling the game flow -->
     <div id="controls">
         <button id="start-memorizing" style="display: block;">Start Memorizing (Show Cards)</button>
         <button id="start-playing" style="display: none;">Start Playing (Hide Cards)</button>
         <button id="restart">Restart Game</button>
     </div>
     
+    <!-- Dynamic instructions for the player -->
     <div id="instructions" style="margin: 20px 0; padding: 10px; background: #f0f0f0; border-radius: 5px;">
         <p><strong>How to play:</strong></p>
         <p id="instruction-text">Click "Start Memorizing" to see all the cards and memorize their positions.</p>
     </div>
     
+    <!-- The game board (cards rendered server-side) -->
     <div id="board" class="board">
+        {# Render one div per card with its index stored in a data attribute #}
         {% for card in game.cards %}
         <div class="card" data-index="{{ forloop.counter0 }}"></div>
         {% endfor %}
     </div>
     
+    <!-- Message shown when the player wins -->
     <div id="message" class="message" style="display: none;">You Win!</div>
 
+    <!-- Frontend game logic -->
     <script src="/static/js/game.js"></script>
 </body>
 </html>
