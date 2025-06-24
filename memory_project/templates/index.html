@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Memory Game</h1>
+    <div id="moves">Moves: {{ game.moves }}</div>
+    <div id="board" class="board">
+        {% for i in range(game.cards|length) %}
+        <div class="card" data-index="{{ i }}"></div>
+        {% endfor %}
+    </div>
+    <button id="restart">Restart Game</button>
+    <div id="message" class="message" style="display: none;">You Win!</div>
+
+    <script src="/static/js/game.js"></script>
+</body>
+</html>
