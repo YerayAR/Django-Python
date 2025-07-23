@@ -1,30 +1,30 @@
-"""Django views for the Memory Game application."""
+"""Vistas de Django para la aplicación Memory Game."""
 
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .logic import GameBoard
+from ..services.logic import GameBoard
 
-# Key used to store the serialized :class:`GameBoard` in the session
+# Clave empleada para almacenar el :class:`GameBoard` serializado en la sesión
 SESSION_KEY = 'game_state'
 
 
 def get_game(request):
-    """Retrieve the current :class:`GameBoard` from the session.
+    """Obtiene el :class:`GameBoard` actual desde la sesión.
 
-    If no game is stored, a new one is created. The resulting game state is
-    written back to the session to ensure persistence between requests.
+    Si no existe un juego en la sesión se crea uno nuevo y se persiste
+    nuevamente en la sesión para mantener el estado entre peticiones.
 
     Parameters
     ----------
     request : HttpRequest
-        The incoming HTTP request containing the session.
+        Solicitud HTTP que contiene la sesión.
 
     Returns
     -------
     GameBoard
-        The game board representing the current game state.
+        Tablero que representa el estado actual del juego.
     """
     data = request.session.get(SESSION_KEY)
     game = GameBoard(data)
@@ -34,7 +34,7 @@ def get_game(request):
 
 
 def index(request):
-    """Render the main game page with the current board state."""
+    """Renderiza la página principal con el estado actual del tablero."""
     game = get_game(request)
     context = {
         'game': game,
@@ -43,7 +43,7 @@ def index(request):
 
 
 def flip_card(request, index):
-    """Flip a card at the given ``index`` and return the updated game state."""
+    """Voltea la carta indicada por ``index`` y devuelve el estado actualizado."""
     game = get_game(request)
     mismatch = False
     if index == -1:
@@ -65,14 +65,14 @@ def flip_card(request, index):
 
 
 def restart_game(request):
-    """Clear the current game from the session and redirect to ``index``."""
+    """Elimina el juego actual de la sesión y redirige a ``index``."""
     if SESSION_KEY in request.session:
         del request.session[SESSION_KEY]
     return redirect(reverse('index'))
 
 
 def start_memorizing(request):
-    """Transition the game into the memorizing phase."""
+    """Pasa el juego a la fase de memorización."""
     game = get_game(request)
     game.start_memorizing()
     request.session[SESSION_KEY] = game.to_dict()
@@ -87,7 +87,7 @@ def start_memorizing(request):
 
 
 def start_playing(request):
-    """Transition the game into the playing phase."""
+    """Inicia la fase de juego ocultando las cartas."""
     game = get_game(request)
     game.start_playing()
     request.session[SESSION_KEY] = game.to_dict()

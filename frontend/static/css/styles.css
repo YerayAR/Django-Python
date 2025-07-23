@@ -1,11 +1,11 @@
-/* General page layout */
+/* Estilos generales de la página */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
 }
 
-/* Container for the cards */
+/* Contenedor de las cartas */
 .board {
     display: grid;
     grid-template-columns: repeat(4, 80px);
@@ -14,7 +14,7 @@ body {
     margin-top: 20px;
 }
 
-/* Individual card style */
+/* Estilo de cada carta */
 .card {
     width: 80px;
     height: 80px;
@@ -28,12 +28,12 @@ body {
     user-select: none;
 }
 
-/* Style for cards that have been matched */
+/* Estilo para cartas que ya han sido emparejadas */
 .card.matched {
     background-color: #777;
 }
 
-/* Winning message */
+/* Mensaje de victoria */
 #message {
     margin-top: 20px;
     font-size: 24px;
@@ -41,7 +41,7 @@ body {
     font-weight: bold;
 }
 
-/* Container for phase and move display */
+/* Contenedor para la fase actual y los movimientos */
 #game-status {
     display: flex;
     justify-content: space-between;
@@ -51,13 +51,13 @@ body {
     border-radius: 5px;
 }
 
-/* Section with control buttons */
+/* Sección con los botones de control */
 #controls {
     margin: 20px 0;
     text-align: center;
 }
 
-/* Styling for all buttons */
+/* Estilo para todos los botones */
 #controls button {
     margin: 0 10px;
     padding: 10px 20px;
@@ -68,7 +68,7 @@ body {
     transition: background-color 0.3s;
 }
 
-/* Green button used to show all cards */
+/* Botón verde para mostrar todas las cartas */
 #start-memorizing {
     background-color: #4CAF50;
     color: white;
@@ -78,7 +78,7 @@ body {
     background-color: #45a049;
 }
 
-/* Blue button used to start playing */
+/* Botón azul para comenzar a jugar */
 #start-playing {
     background-color: #2196F3;
     color: white;
@@ -88,7 +88,7 @@ body {
     background-color: #1976D2;
 }
 
-/* Red button to restart the game */
+/* Botón rojo para reiniciar el juego */
 #restart {
     background-color: #f44336;
     color: white;
@@ -98,13 +98,13 @@ body {
     background-color: #d32f2f;
 }
 
-/* Text for current phase */
+/* Texto que indica la fase actual */
 #phase-info {
     font-weight: bold;
     color: #333;
 }
 
-/* Highlighted phase value */
+/* Valor destacado de la fase */
 #current-phase {
     color: #2196F3;
 }

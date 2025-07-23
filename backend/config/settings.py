@@ -1,16 +1,21 @@
-"""Django settings for the Memory Game project."""
+"""Configuración principal de Django para el proyecto Memory Game."""
 
 import os
 from pathlib import Path
 
+# Carpeta raíz del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Clave secreta utilizada por Django (debe cambiarse en producción)
 SECRET_KEY = 'replace-this-secret-key'
 
+# Modo de depuración activado para desarrollo
 DEBUG = True
 
+# Hosts permitidos para la aplicación
 ALLOWED_HOSTS = ['*']
 
+# Aplicaciones instaladas en el proyecto
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -21,6 +26,7 @@ INSTALLED_APPS = [
     'game',
 ]
 
+# Middleware utilizado por la aplicación
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -31,12 +37,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'memory_project.urls'
+# Módulo de rutas principal
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        # Ruta donde se encuentran las plantillas del frontend
+        'DIRS': [BASE_DIR.parent / 'frontend' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -49,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'memory_project.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -71,6 +79,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+# Directorio donde se ubican los archivos estáticos del frontend
+STATICFILES_DIRS = [BASE_DIR.parent / 'frontend' / 'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

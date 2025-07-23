@@ -1,10 +1,10 @@
-"""Application configuration for the game app."""
+"""Configuración de la aplicación ``game``."""
 
 from django.apps import AppConfig
 
 
 class GameConfig(AppConfig):
-    """Django configuration for the ``game`` application."""
+    """Configura la aplicación ``game`` dentro del proyecto."""
 
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'game'

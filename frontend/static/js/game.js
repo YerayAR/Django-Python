@@ -1,5 +1,5 @@
 /**
- * Update the DOM to reflect the current board state returned by the backend.
+ * Actualiza el DOM para reflejar el estado del tablero devuelto por el backend.
  */
 function updateBoard(data) {
     const board = document.getElementById('board');
