@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Start Django development server
-CMD ["python", "memory_project/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "backend/manage.py", "runserver", "0.0.0.0:8000"]

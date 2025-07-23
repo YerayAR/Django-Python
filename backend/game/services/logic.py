@@ -1,18 +1,18 @@
-"""Core game logic for the Memory Game."""
+"""Lógica central del juego de memoria."""
 
 import random
 
 
 class GameBoard:
-    """Representation of the memory game board and its current state."""
+    """Representa el tablero y su estado actual."""
 
     def __init__(self, data=None):
-        """Create a new board or restore one from ``data``.
+        """Crea un tablero nuevo o restaura uno desde ``data``.
 
         Parameters
         ----------
         data : dict, optional
-            Serialized board state previously returned by :meth:`to_dict`.
+            Estado serializado previamente devuelto por :meth:`to_dict`.
         """
         if data:
             # Restore saved state from the session
@@ -25,7 +25,7 @@ class GameBoard:
             self.new_game()
 
     def new_game(self):
-        """Initialize a new shuffled board in ``setup`` phase."""
+        """Inicializa un nuevo tablero mezclado en fase ``setup``."""
         pairs = list(range(8)) * 2
         random.shuffle(pairs)
         self.cards = pairs
@@ -36,7 +36,7 @@ class GameBoard:
         self.start_time = None
 
     def flip(self, index):
-        """Flip a card and evaluate if a pair is found.
+        """Voltea una carta y evalúa si se ha encontrado una pareja.
 
         Parameters
         ----------
@@ -82,7 +82,7 @@ class GameBoard:
         return mismatch
 
     def _resolve_mismatch(self):
-        """Hide the two currently flipped cards if they do not match."""
+        """Oculta las dos cartas volteadas si no coinciden."""
         uncovered = self._uncovered_indices()
         if len(uncovered) == 2:
             i, j = uncovered
@@ -90,32 +90,32 @@ class GameBoard:
                 self.states[i] = self.states[j] = 0
 
     def _uncovered_indices(self):
-        """Return indices of cards that are currently flipped but not matched."""
+        """Devuelve los índices de cartas volteadas que aún no se han emparejado."""
         return [i for i, s in enumerate(self.states) if s == 1]
 
     def is_win(self):
-        """Return ``True`` if all cards have been matched."""
+        """Indica si todas las cartas han sido emparejadas."""
         return all(s == 2 for s in self.states)
     
     def start_memorizing(self):
-        """Begin the memorizing phase showing all cards."""
+        """Inicia la fase de memorización mostrando todas las cartas."""
         self.phase = 'memorizing'
         import time
         self.start_time = time.time()
     
     def start_playing(self):
-        """Begin the playing phase hiding all cards and resetting moves."""
+        """Comienza la fase de juego ocultando las cartas y reiniciando movimientos."""
         self.phase = 'playing'
         # Reset all cards to hidden state
         self.states = [0] * len(self.cards)
         self.moves = 0
     
     def can_flip(self):
-        """Return ``True`` if cards may be flipped in the current phase."""
+        """Devuelve ``True`` si se pueden voltear cartas en la fase actual."""
         return self.phase == 'playing'
 
     def to_dict(self):
-        """Serialize the board to a dictionary for storing in the session."""
+        """Serializa el tablero a un diccionario para almacenarlo en sesión."""
         return {
             'cards': self.cards,
             'states': self.states,

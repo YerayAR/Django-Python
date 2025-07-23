@@ -1,17 +1,17 @@
-"""URL routing for the game application."""
+"""Enrutamiento de URLs para la aplicación del juego."""
 
 from django.urls import path
-from . import views
+from ..controllers import views
 
 urlpatterns = [
-    # Main page showing the board
+    # Página principal con el tablero
     path('', views.index, name='index'),
-    # AJAX endpoint to flip a card
+    # EndPoint AJAX para voltear una carta
     path('flip/<int:index>/', views.flip_card, name='flip'),
-    # Reset the current game
+    # Reinicia la partida actual
     path('restart/', views.restart_game, name='restart'),
-    # Transition to memorizing phase
+    # Iniciar fase de memorización
     path('start-memorizing/', views.start_memorizing, name='start_memorizing'),
-    # Transition to playing phase
+    # Iniciar fase de juego
     path('start-playing/', views.start_playing, name='start_playing'),
 ]
