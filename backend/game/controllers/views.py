@@ -45,12 +45,7 @@ def index(request):
 def flip_card(request, index):
     """Voltea la carta indicada por ``index`` y devuelve el estado actualizado."""
     game = get_game(request)
-    mismatch = False
-    if index == -1:
-        # ``-1`` is used by the frontend to resolve a mismatch after a delay
-        game.flip(None)
-    else:
-        mismatch = game.flip(index)
+    mismatch = game.flip(index)
 
     request.session[SESSION_KEY] = game.to_dict()
     response = {
@@ -97,5 +92,21 @@ def start_playing(request):
         'moves': game.moves,
         'phase': game.phase,
         'win': False,
+    }
+    return JsonResponse(response)
+
+
+def resolve_mismatch(request):
+    """Resuelve un mismatch ocultando las cartas que no coinciden."""
+    game = get_game(request)
+    game.flip(None)  # Usa None para resolver mismatch
+    request.session[SESSION_KEY] = game.to_dict()
+    response = {
+        'cards': game.cards,
+        'states': game.states,
+        'moves': game.moves,
+        'win': game.is_win(),
+        'mismatch': False,
+        'phase': game.phase,
     }
     return JsonResponse(response)

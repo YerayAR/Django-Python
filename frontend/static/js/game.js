@@ -71,7 +71,7 @@ function fetchFlip(index) {
             if (data.mismatch) {
                 setTimeout(() => {
                     // Resolve mismatch after short delay
-                    fetch('/flip/-1/')
+                    fetch('/resolve-mismatch/')
                         .then(r => r.json())
                         .then(updateBoard);
                 }, 1000);

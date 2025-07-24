@@ -8,6 +8,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     # EndPoint AJAX para voltear una carta
     path('flip/<int:index>/', views.flip_card, name='flip'),
+    # EndPoint para resolver mismatch después de delay
+    path('resolve-mismatch/', views.resolve_mismatch, name='resolve_mismatch'),
     # Reinicia la partida actual
     path('restart/', views.restart_game, name='restart'),
     # Iniciar fase de memorización
